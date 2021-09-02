@@ -1,0 +1,115 @@
+<div class="card-container">
+    <mat-card>
+        <mat-card-content>
+            <h2>Signup</h2>
+            <form [formGroup]="signupForm" (ngSubmit)="signup()">
+                <div class="name-container">
+                    <mat-form-field appearance="outline">
+                      <mat-label>Enter your Name</mat-label>
+                      <input matInput placeholder="John Smith" formControlName="name" required>
+                      <mat-error *ngIf="signupForm.get('name')?.hasError('required')">
+                          Enter Email
+                      </mat-error>
+                    </mat-form-field>
+                  </div>
+    
+                  <div class="username-container">
+                    <mat-form-field appearance="outline">
+                      <mat-label>Enter your Username</mat-label>
+                      <input matInput placeholder="CodeGeek" formControlName="username" required>
+                      <mat-error *ngIf="signupForm.get('username')?.hasError('required')">
+                          Enter username
+                      </mat-error>
+                    </mat-form-field>
+                  </div>
+    
+                  <div class="email-container">
+                    <mat-form-field appearance="outline">
+                        <mat-label>Email</mat-label><br>
+                        <input formControlName="email" matInput required>
+                        <mat-error *ngIf="signupForm.get('email')?.errors?.required">
+                            Required Email Address
+                        </mat-error>
+                    </mat-form-field>
+                </div>
+    
+                <div>
+                    <mat-form-field class="full-width" appearance="outline">
+                      <mat-label>Password</mat-label>
+                      <input formControlName="password" matInput [type]=" hide ? 'password' : 'text'" required />
+                      <button  mat-icon-button matSuffix (click)="hide = !hide" [attr.aria-label]="'Hide Password'"
+                      [attr.aria-pressed]="hide">
+                        <mat-icon>
+                            {{hide ? 'visibility_off' : 'visibility'}}
+                        </mat-icon>
+                      </button>
+                    <mat-error *ngIf="!signupForm.controls['password'].valid">
+                      Password is required
+                    </mat-error>
+                    </mat-form-field>
+                </div>
+    
+                <div formGroupName='address'>
+                    <h3>Address</h3>
+                    <table>
+                        <tr>
+                            <td>
+                                <mat-form-field appearance="outline">
+                                    <mat-label>House-No</mat-label>
+                                    <input matInput placeholder="2/10" formControlName="houseNo" required>
+                                    <mat-error *ngIf="signupForm.get('address')?.get('houseNo')?.hasError('required')">
+                                        Enter HouseNo
+                                    </mat-error>
+                                  </mat-form-field>
+                            </td>
+                            <td>
+                                <mat-form-field appearance="outline">
+                                    <mat-label>Street</mat-label>
+                                    <input matInput placeholder="indirapuram" formControlName="street" required>
+                                    <mat-error *ngIf="signupForm.get('address')?.get('street')?.hasError('required')">
+                                        Enter Street
+                                    </mat-error>
+                                  </mat-form-field>
+                            </td>
+                        </tr>
+                        <tr>
+                            <td>
+                                <mat-form-field appearance="outline">
+                                    <mat-label>District</mat-label>
+                                    <input matInput placeholder="ghaziabad" formControlName="district" required>
+                                    <mat-error *ngIf="signupForm.get('address')?.get('district')?.hasError('required')">
+                                        Enter District
+                                    </mat-error>
+                                  </mat-form-field>
+                            </td>
+                            <td>
+                                <mat-form-field appearance="outline">
+                                    <mat-label>State</mat-label>
+                                    <input matInput placeholder="Uttar Pradesh" formControlName="state" required>
+                                    <mat-error *ngIf="signupForm.get('address')?.get('state')?.hasError('required')">
+                                        Enter State
+                                    </mat-error>
+                                  </mat-form-field>
+                            </td>
+                        </tr>
+                        <tr>
+                            <td>
+                                <mat-form-field appearance="outline">
+                                    <mat-label>Pincode</mat-label>
+                                    <input matInput placeholder="123456" formControlName="pincode" required>
+                                    <mat-error *ngIf="signupForm.get('address')?.get('pincode')?.hasError('required')">
+                                        Enter Pincode
+                                    </mat-error>
+                                  </mat-form-field>
+                            </td>
+                        </tr>
+                    </table>
+                    
+    
+                </div>
+    
+                <button type="submit" mat-flat-button color="primary">SignUp</button>
+            </form>
+        </mat-card-content>
+    </mat-card>
+</div>
