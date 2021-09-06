@@ -1,6 +1,7 @@
 import { Component, OnInit } from '@angular/core';
-import { FormGroup,FormControl,Validators } from '@angular/forms'
-import {SignupService} from '../../services/signup.service'
+import { FormGroup,FormControl,Validators } from '@angular/forms';
+import {SignupService} from '../../services/signup.service';
+import { Router } from '@angular/router';
 
 @Component({
   selector: 'app-signup-view',
@@ -26,17 +27,19 @@ export class SignupViewComponent implements OnInit {
     })
   })
 
-  constructor(private signupcontroller:SignupService) { }
+  constructor(private signupcontroller:SignupService,
+    private router:Router) { }
 
   ngOnInit(): void {
   }
 
   signup() {
-    this.signupcontroller.signup(this.signupForm.value).then(()=>{
-      console.log("signedUp");
-    }).catch((err)=>{
-      console.log(err);
-    });
+    this.signupcontroller.signup(this.signupForm.value).subscribe((res)=>{
+      localStorage.setItem('currentUser' , res);
+      this.signupcontroller.createuser(this.signupForm.value).subscribe((res)=>{
+        this.router.navigate(['/profile'])
+      })
+    })
   }
 
 }

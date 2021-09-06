@@ -20,6 +20,11 @@ const routes: Routes = [
     path:'profile',
     loadChildren:()=>import('./user-profile/user-profile.module').then(m=>m.UserProfileModule),
     canActivate:[AuthguardService]
+  },
+  {
+    path:'edituser',
+    loadChildren:()=>import('./edit-user/edit-user.module').then(m=>m.EditUserModule),
+    canActivate:[AuthguardService]
   }
 ];
 

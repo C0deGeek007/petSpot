@@ -1,0 +1,40 @@
+.sidenav-container {
+  height: 100%;
+  position:static;
+}
+
+.sidenav {
+  position:absolute;
+  width: 200px;
+  top: 64px;
+}
+
+.sidenav .mat-toolbar {
+  background: inherit;
+}
+
+.mat-toolbar.mat-primary {
+  top: 0;
+  z-index: 1;
+}
+
+.current {
+  color: red;
+}
+
+.mainContent {
+  margin-left: 200px;
+  height: 100%;
+  margin-top: 64px;
+}
+
+mat-sidenav-content {
+  position: sticky;
+}
+
+@media screen and (max-width:958px) {
+  .mainContent{
+    margin-left: 0;
+    height: 100%;
+  }
+}

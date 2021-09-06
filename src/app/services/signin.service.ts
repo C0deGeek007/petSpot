@@ -1,25 +1,21 @@
 import { Injectable } from '@angular/core';
-import { AngularFireAuth } from '@angular/fire/compat/auth';
+//import { AngularFireAuth } from '@angular/fire/compat/auth';
 import { Router } from '@angular/router';
-import { AngularFirestore } from '@angular/fire/compat/firestore';
+import { HttpClient } from '@angular/common/http'
+//import { AngularFirestore } from '@angular/fire/compat/firestore';
 
 @Injectable({
   providedIn: 'root'
 })
 export class SigninService {
 
-  constructor(private afAuth: AngularFireAuth,
-    private router:Router,
-    private db: AngularFirestore) { }
+  constructor( private router:Router ,
+    private http:HttpClient
+    ) { }
 
   signIn(email:string, password:string) {
-    return this.afAuth.signInWithEmailAndPassword(email, password) .then((result) => {
-      localStorage.setItem('currentUser', result.user!.uid);
-      console.log(result);
-      this.router.navigate(['/profile'])
-    }).catch((error) => {
-      window.alert(error.message);
-    })
+    const body={email:email,password:password};
+    return this.http.post<any>('http://localhost:4200/login',body);
   }
 
   loggedIn(): boolean {
@@ -27,10 +23,8 @@ export class SigninService {
   }
 
   signOut() {
-    return this.afAuth.signOut().then(() => {   
-      localStorage.clear();
-      this.router.navigate(['login']);
-    })
+    localStorage.clear();
+    this.router.navigate(['login']);
   }
 
 }

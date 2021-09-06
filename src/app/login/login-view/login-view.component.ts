@@ -1,6 +1,7 @@
 import { Component, OnInit } from '@angular/core';
-import { FormGroup,FormControl,Validators } from '@angular/forms'
-import { SigninService } from '../../services/signin.service'
+import { FormGroup,FormControl,Validators } from '@angular/forms';
+import { SigninService } from '../../services/signin.service';
+import { Router } from '@angular/router';
 
 @Component({
   selector: 'app-login-view',
@@ -16,18 +17,25 @@ export class LoginViewComponent implements OnInit {
     password:new FormControl('',Validators.required)
   });
 
-  constructor(private signincontroller:SigninService) { }
+  constructor(private signincontroller:SigninService,
+    private router:Router
+    ) { }
 
   ngOnInit(): void {
   }
 
   onLogin():void {
-    console.log(this.loginForm.value);
-    this.signincontroller.signIn(this.loginForm.value['email'],this.loginForm.value['password']);
+    this.signincontroller.signIn(this.loginForm.value['email'],this.loginForm.value['password']).subscribe((res)=>{
+      localStorage.setItem('currentUser',res);
+      console.log("onlogin function");
+      console.log(localStorage.getItem('currentUser'));
+      this.router.navigate(['/profile']);
+    },(err)=>{
+      console.log("Error");
+    })
   }
 
   getErrorMessage() {
-    console.log("has error")
     if (this.loginForm.get('email')?.hasError('required')) {
       return 'You must enter a value';
     }
