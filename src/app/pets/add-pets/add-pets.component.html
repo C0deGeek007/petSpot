@@ -1,0 +1,51 @@
+
+<app-layout-one>
+    <mat-card>
+        <mat-card-content>
+            <h2>Signup</h2>
+            <form [formGroup]="addpetsform" (ngSubmit)="addpet()">
+                <div class="name-container">
+                    <mat-form-field appearance="outline">
+                      <mat-label>Enter pets Name</mat-label>
+                      <input matInput placeholder="dog" formControlName="name" required>
+                      <mat-error *ngIf="addpetsform.get('name')?.hasError('required')">
+                          Enter Name
+                      </mat-error>
+                    </mat-form-field>
+                  </div>
+
+                  <div class="species-container">
+                    <mat-form-field appearance="outline">
+                      <mat-label>Enter species Name</mat-label>
+                      <input matInput placeholder="Homosapien" formControlName="species" required>
+                      <mat-error *ngIf="addpetsform.get('species')?.hasError('required')">
+                          Enter species
+                      </mat-error>
+                    </mat-form-field>
+                  </div>
+
+                  <div class="breed-container">
+                    <mat-form-field appearance="outline">
+                      <mat-label>Enter Breed Name</mat-label>
+                      <input matInput placeholder="shepard" formControlName="breed" required>
+                      <mat-error *ngIf="addpetsform.get('breed')?.hasError('required')">
+                          Enter Breed
+                      </mat-error>
+                    </mat-form-field>
+                  </div>
+
+                  <div class="color-container">
+                    <mat-form-field appearance="outline">
+                      <mat-label>Enter Color</mat-label>
+                      <input matInput placeholder="golden" formControlName="color" required>
+                      <mat-error *ngIf="addpetsform.get('color')?.hasError('required')">
+                          Enter color
+                      </mat-error>
+                    </mat-form-field>
+                  </div>    
+                <button type="submit" mat-flat-button color="primary">Add</button>
+            </form>
+        </mat-card-content>
+    </mat-card>
+</app-layout-one>
+

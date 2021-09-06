@@ -4,6 +4,7 @@ import { Observable, of } from "rxjs";
 import { mockUser } from '../usersData/mock-user';
 import { mockUserInfo } from '../usersData/mock-userInfo';
 import { emailindex } from '../usersData/emailIndexMap';
+import { userpetsmap } from '../usersData/mock-pets';
 
 
 @Injectable()
@@ -48,16 +49,34 @@ export class globalInterceptor implements HttpInterceptor {
         }
 
         if(req.method==='POST' && req.url==='http://localhost:4200/editUser') {
-            console.log("url intercepted");
             const userid=parseInt(req.body['id']);
-            console.log(userid);
-            console.log(typeof(userid));
-            console.log(req.body);
             mockUser[userid].password=req.body['password'];
             mockUserInfo[userid].username=req.body['username'];
             mockUserInfo[userid].password=req.body['password'];
             return of(new HttpResponse({
                 status:200
+            }))
+        }
+
+        if(req.method==='POST' && req.url==='http://localhost:4200/addpets') {
+            const userid=parseInt(req.body.userid);
+            delete req.body.userid;
+            const petsdetails=req.body;
+            // console.log('inside interceptor');
+            // console.log(userid);
+            // console.log(petsdetails);
+            if(userpetsmap.has(userid)) {
+                const petid=userpetsmap.get(userid)?.length
+                petsdetails['id']=petid;
+                userpetsmap.get(userid)?.push(petsdetails);
+            } else {
+                userpetsmap.set(userid,[]);
+                petsdetails['id']=0;
+                userpetsmap.get(userid)?.push(petsdetails);
+            }
+            return of(new HttpResponse({
+                status:200,
+                body:userpetsmap
             }))
         }
 

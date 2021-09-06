@@ -25,6 +25,11 @@ const routes: Routes = [
     path:'edituser',
     loadChildren:()=>import('./edit-user/edit-user.module').then(m=>m.EditUserModule),
     canActivate:[AuthguardService]
+  },
+  {
+    path:'pets',
+    loadChildren:()=>import('./pets/pets.module').then(m=>m.PetsModule),
+    canActivate:[AuthguardService]
   }
 ];
 
