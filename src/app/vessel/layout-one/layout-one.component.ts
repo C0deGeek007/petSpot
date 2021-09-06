@@ -2,6 +2,7 @@ import { Component } from '@angular/core';
 import { BreakpointObserver, Breakpoints } from '@angular/cdk/layout';
 import { Observable } from 'rxjs';
 import { map, shareReplay } from 'rxjs/operators';
+import { SigninService } from '../../services/signin.service';
 
 @Component({
   selector: 'app-layout-one',
@@ -16,6 +17,12 @@ export class LayoutOneComponent {
       shareReplay()
     );
 
-  constructor(private breakpointObserver: BreakpointObserver) {}
+  constructor(private breakpointObserver: BreakpointObserver,
+    private signincontroller:SigninService,
+    ) {}
+
+  signout() {
+    this.signincontroller.signOut();
+  }
 
 }

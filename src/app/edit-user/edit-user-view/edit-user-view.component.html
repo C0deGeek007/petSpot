@@ -1,3 +1,94 @@
 <app-layout-one>
-    <p>edit-user-view works!</p>
+    <div class="card-container">
+        <mat-card>
+            <mat-card-content>
+                <h2>Signup</h2>
+                <form [formGroup]="userDetailForm" (ngSubmit)="save()">
+                    <div class="name-container">
+                        <mat-form-field appearance="outline">
+                          <mat-label>Name</mat-label>
+                          <input  formControlName="name" matInput placeholder="John Smith"  required >
+                        </mat-form-field>
+                      </div>
+        
+                      <div class="username-container">
+                        <mat-form-field appearance="outline">
+                            <mat-label>Username</mat-label>
+                            <input matInput placeholder="CodeGeek" formControlName="username" required>
+                            <mat-error *ngIf="userDetailForm.get('username')?.hasError('required')">
+                                Enter username
+                            </mat-error>
+                          </mat-form-field>
+                      </div>
+        
+                      <div class="email-container">
+                        <mat-form-field appearance="outline">
+                            <mat-label>Email</mat-label><br>
+                            <input formControlName="email" matInput required>
+                        </mat-form-field>
+                    </div>
+        
+                    <div>
+                        <mat-form-field class="full-width" appearance="outline">
+                            <mat-label>Password</mat-label>
+                            <input formControlName="password" matInput [type]=" hide ? 'password' : 'text'" required />
+                            <button  mat-icon-button matSuffix (click)="hide = !hide" [attr.aria-label]="'Hide Password'"
+                            [attr.aria-pressed]="hide">
+                              <mat-icon>
+                                  {{hide ? 'visibility_off' : 'visibility'}}
+                              </mat-icon>
+                            </button>
+                          <mat-error *ngIf="!userDetailForm.controls['password'].valid">
+                            Password is required
+                          </mat-error>
+                          </mat-form-field>
+                    </div>
+        
+                    <div formGroupName='address'>
+                        <h3>Address</h3>
+                        <table>
+                            <tr>
+                                <td>
+                                    <mat-form-field appearance="outline">
+                                        <mat-label>House-No</mat-label>
+                                        <input formControlName="houseNo" matInput placeholder="2/10"  required>
+                                      </mat-form-field>
+                                </td>
+                                <td>
+                                    <mat-form-field appearance="outline">
+                                        <mat-label>Street</mat-label>
+                                        <input formControlName="street" matInput placeholder="indirapuram"  required>
+                                      </mat-form-field>
+                                </td>
+                            </tr>
+                            <tr>
+                                <td>
+                                    <mat-form-field appearance="outline">
+                                        <mat-label>District</mat-label>
+                                        <input formControlName="district" matInput placeholder="ghaziabad"  required>
+                                      </mat-form-field>
+                                </td>
+                                <td>
+                                    <mat-form-field appearance="outline">
+                                        <mat-label>State</mat-label>
+                                        <input formControlName="state" matInput placeholder="Uttar Pradesh" required>
+                                      </mat-form-field>
+                                </td>
+                            </tr>
+                            <tr>
+                                <td>
+                                    <mat-form-field appearance="outline">
+                                        <mat-label>Pincode</mat-label>
+                                        <input formControlName="pincode" matInput placeholder="123456"  required>
+                                      </mat-form-field>
+                                </td>
+                            </tr>
+                        </table>
+                    </div>
+                    <button type="submit" mat-flat-button color="primary">Save</button>
+                </form>
+            </mat-card-content>
+        </mat-card>
+    </div>
 </app-layout-one>
+

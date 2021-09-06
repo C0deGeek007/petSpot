@@ -13,4 +13,10 @@ export class ProfileService {
     return this.http.get<any>('http://localhost:4200/profile',{params:{id:user}});
   }
 
+  editUserProfile(userChanges:object) {
+    console.log("user changes are");
+    console.log(userChanges);
+    return this.http.post<any>('http://localhost:4200/editUser',userChanges)
+  }
+
 }

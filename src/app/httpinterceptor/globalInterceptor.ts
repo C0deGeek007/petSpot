@@ -47,6 +47,20 @@ export class globalInterceptor implements HttpInterceptor {
             }))
         }
 
+        if(req.method==='POST' && req.url==='http://localhost:4200/editUser') {
+            console.log("url intercepted");
+            const userid=parseInt(req.body['id']);
+            console.log(userid);
+            console.log(typeof(userid));
+            console.log(req.body);
+            mockUser[userid].password=req.body['password'];
+            mockUserInfo[userid].username=req.body['username'];
+            mockUserInfo[userid].password=req.body['password'];
+            return of(new HttpResponse({
+                status:200
+            }))
+        }
+
         console.log("request not intercepted");
         return next.handle(req);
     }
