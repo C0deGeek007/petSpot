@@ -18,8 +18,12 @@ export class PetsService {
     return this.http.get<any>('http://localhost:4200/getpets',{params:{id:userid}});
   }
 
-  editpets(petid:string,userid:string) {
-    return this.http.get<any>('http://localhost:4200/editpets',{params:{petid:petid,userid:userid}})
+  getPetById(petid:string,userid:string) {
+    return this.http.get<any>('http://localhost:4200/petById',{params:{petid:petid,userid:userid}})
+  }
+
+  editpets(details:object){
+    return this.http.post<any>('http://localhost:4200/editpets',details);
   }
 
 }

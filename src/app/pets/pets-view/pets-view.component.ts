@@ -20,8 +20,6 @@ export class PetsViewComponent implements OnInit {
   ngOnInit(): void {
     this.userId=localStorage.getItem('currentUser') as string;
     this.petservice.getpets(this.userId).subscribe((res)=>{
-      console.log("inside getpets subscribe");
-      console.log(res);
       this.dataSource=res;
       if(res.length!=0) {
         this.nodata=false;
@@ -36,7 +34,7 @@ export class PetsViewComponent implements OnInit {
   }
 
   info(row:any) {
-    console.log(row);
+    //console.log(row);
     this.router.navigate(['/pets/editpets',row['id']]);
   }
 

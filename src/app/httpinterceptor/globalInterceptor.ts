@@ -98,6 +98,25 @@ export class globalInterceptor implements HttpInterceptor {
             }
         }
 
+        if(req.method==='GET' && req.url==='http://localhost:4200/petById') {
+            const petid=parseInt(req.params.get('petid') as string);
+            const userid=parseInt(req.params.get('userid') as string);
+            return of(new HttpResponse({
+                status:200,
+                body:userpetsmap.get(userid)![petid]
+            }))
+        }
+
+        if(req.method==='POST' && req.url==='http://localhost:4200/editpets') {
+            const userid=parseInt(req.body.userid);
+            delete req.body.userid;
+            const petid=parseInt(req.body.id);
+            userpetsmap.get(userid)![petid]=req.body;
+            return of(new HttpResponse({
+                status:200
+            }))
+        }
+
         console.log("request not intercepted");
         return next.handle(req);
     }
