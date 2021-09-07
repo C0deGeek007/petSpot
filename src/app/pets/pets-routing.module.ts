@@ -2,6 +2,7 @@ import { NgModule } from '@angular/core';
 import { RouterModule, Routes } from '@angular/router';
 import { AuthguardService } from '../services/authguard.service';
 import { AddPetsComponent } from './add-pets/add-pets.component';
+import { EditPetsComponent } from './edit-pets/edit-pets.component';
 import { PetsViewComponent } from './pets-view/pets-view.component';
 
 const routes: Routes = [
@@ -13,6 +14,11 @@ const routes: Routes = [
   {
     path:'addpets',
     component:AddPetsComponent,
+    canActivate:[AuthguardService]
+  },
+  {
+    path:'editpets/:details',
+    component:EditPetsComponent,
     canActivate:[AuthguardService]
   }
 ];

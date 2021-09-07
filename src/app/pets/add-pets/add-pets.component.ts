@@ -30,13 +30,10 @@ export class AddPetsComponent implements OnInit {
   }
 
   addpet() {
-    // console.log("add pet function");
-    // console.log(this.addpetsform.value);s
     const petdetail={...this.addpetsform.value};
     petdetail['userid']=this.userId
     this.petservice.addpets(petdetail).subscribe((res)=>{
-      console.log("inside subscribe");
-      console.log(res);
+      this.router.navigate(['/pets/petsview'])
     },(err)=>{
       console.log("error");
     })

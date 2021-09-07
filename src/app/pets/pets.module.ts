@@ -8,12 +8,14 @@ import { VesselModule } from '../vessel/vessel.module';
 import { MaterialApiModule } from '../material-api/material-api.module';
 import { FormsModule } from '@angular/forms'; 
 import { ReactiveFormsModule } from '@angular/forms';
+import { EditPetsComponent } from './edit-pets/edit-pets.component';
 
 
 @NgModule({
   declarations: [
     PetsViewComponent,
-    AddPetsComponent
+    AddPetsComponent,
+    EditPetsComponent
   ],
   imports: [
     CommonModule,

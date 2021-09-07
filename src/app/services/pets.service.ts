@@ -15,9 +15,11 @@ export class PetsService {
   }
 
   getpets(userid:string) {
-    console.log("inside get pets service")
-    console.log(userid)
     return this.http.get<any>('http://localhost:4200/getpets',{params:{id:userid}});
+  }
+
+  editpets(petid:string,userid:string) {
+    return this.http.get<any>('http://localhost:4200/editpets',{params:{petid:petid,userid:userid}})
   }
 
 }

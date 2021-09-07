@@ -32,11 +32,12 @@ export class PetsViewComponent implements OnInit {
   }
 
   addpet() {
-    this.router.navigate(['/pets/addpets'])
+    this.router.navigate(['/pets/addpets']);
   }
 
   info(row:any) {
     console.log(row);
+    this.router.navigate(['/pets/editpets',row['id']]);
   }
 
 }
