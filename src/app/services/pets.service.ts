@@ -14,4 +14,10 @@ export class PetsService {
     return this.http.post<any>('http://localhost:4200/addpets',petdetail);
   }
 
+  getpets(userid:string) {
+    console.log("inside get pets service")
+    console.log(userid)
+    return this.http.get<any>('http://localhost:4200/getpets',{params:{id:userid}});
+  }
+
 }
